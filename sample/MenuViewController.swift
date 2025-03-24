@@ -92,7 +92,7 @@ class MenuViewController: UIViewController {
                
            } else {
                // Handle invalid or empty quantity
-               DataLabel.text = "Please enter a valid food name and quantity"
+               DataLabel.text = "Please Enter a Valid Food Name and Quantity"
                DataLabel.textColor = .red
                OfferLabel.text = ""
            }
