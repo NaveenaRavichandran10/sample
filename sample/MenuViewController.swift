@@ -44,13 +44,7 @@ class MenuViewController: UIViewController {
           DataLabel.textAlignment = .center
           DataLabel.font = UIFont.systemFont(ofSize: 16)
         
-        //offer
-       // OfferLabel.text = "Offer will appear here"
-        //OfferLabel.textColor = .blue
-        //OfferLabel.textAlignment = .center
-       // OfferLabel.font = UIFont.systemFont(ofSize: 16)
-
-          // Done Button
+        // Done Button
           DoneButton.setTitle("Done", for: .normal)
           DoneButton.setTitleColor(.white, for: .normal)
           DoneButton.backgroundColor = .systemGreen
@@ -96,7 +90,13 @@ class MenuViewController: UIViewController {
                DataLabel.textColor = .red
                OfferLabel.text = ""
            }
+        
        }
+    @IBAction func OrderButtonTapped(_ sender: UIButton) {
+        if let menuVC = storyboard?.instantiateViewController(withIdentifier: "PaymentViewController") as? PaymentViewController {
+            navigationController?.pushViewController(menuVC, animated: true)
+        }
+    }
 
     }
 

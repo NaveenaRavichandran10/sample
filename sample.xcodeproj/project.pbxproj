@@ -18,6 +18,7 @@
 		AA9F4ACF2D91259B00F4543A /* FoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9F4ACE2D91259B00F4543A /* FoodViewController.swift */; };
 		AA9F4AD12D913A4B00F4543A /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9F4AD02D913A4B00F4543A /* MenuViewController.swift */; };
 		AA9F4AD32D91526500F4543A /* OptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9F4AD22D91526400F4543A /* OptionViewController.swift */; };
+		AAF439212D929CD000CFC4A7 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF439202D929CD000CFC4A7 /* PaymentViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		AA9F4ACE2D91259B00F4543A /* FoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodViewController.swift; sourceTree = "<group>"; };
 		AA9F4AD02D913A4B00F4543A /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		AA9F4AD22D91526400F4543A /* OptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionViewController.swift; sourceTree = "<group>"; };
+		AAF439202D929CD000CFC4A7 /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 				AA9F4ACE2D91259B00F4543A /* FoodViewController.swift */,
 				AA9F4AD02D913A4B00F4543A /* MenuViewController.swift */,
 				AA9F4AD22D91526400F4543A /* OptionViewController.swift */,
+				AAF439202D929CD000CFC4A7 /* PaymentViewController.swift */,
 			);
 			path = sample;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA9F4A9F2D91234300F4543A /* AppDelegate.swift in Sources */,
+				AAF439212D929CD000CFC4A7 /* PaymentViewController.swift in Sources */,
 				AA9F4AD32D91526500F4543A /* OptionViewController.swift in Sources */,
 				AA9F4ACF2D91259B00F4543A /* FoodViewController.swift in Sources */,
 				AA9F4AA12D91234300F4543A /* SceneDelegate.swift in Sources */,
