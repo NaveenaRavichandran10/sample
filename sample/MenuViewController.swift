@@ -8,99 +8,114 @@
 import UIKit
 
 class MenuViewController: UIViewController {
+
     @IBOutlet weak var FoodnameTextField: UITextField!
     @IBOutlet weak var OrderButton: UIButton!
     @IBOutlet weak var OfferLabel: UILabel!
-    
+    @IBOutlet weak var QuantitySlider: UISlider!
+    @IBOutlet weak var QuantityLabel: UILabel!
     @IBOutlet weak var DataLabel: UILabel!
     @IBOutlet weak var DoneButton: UIButton!
-    @IBOutlet weak var QuantityTextField: UITextField!
+    @IBOutlet weak var costLabel: UILabel!
+    
+    var selectedFoodName: String?
+    var selectedPrice: Double?
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupUI()
-        
-        
+        view.backgroundColor = UIColor(red: 0.93, green: 0.90, blue: 0.98, alpha: 1.0)
 
+        QuantitySlider.value = 1
+        QuantityLabel.text = "Quantity: \(Int(QuantitySlider.value))"
 
-        // Do any additional setup after loading the view.
+        QuantitySlider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
     }
-    func setupUI(){
-    
 
-        view.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.98, alpha: 1.0) // Light grayish-blue
-            
-          // Text Fields
-          FoodnameTextField.placeholder = "Enter Food Name"
-          FoodnameTextField.borderStyle = .roundedRect
-          FoodnameTextField.font = UIFont.systemFont(ofSize: 18)
-          
-          QuantityTextField.placeholder = "Enter Quantity"
-          QuantityTextField.borderStyle = .roundedRect
-          QuantityTextField.font = UIFont.systemFont(ofSize: 18)
+    func setupUI() {
+        view.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.98, alpha: 1.0)
 
-          //  Label
-          DataLabel.text = "Food and Quantity will appear here"
-          DataLabel.textColor = .darkGray
-          DataLabel.textAlignment = .center
-          DataLabel.font = UIFont.systemFont(ofSize: 16)
+        FoodnameTextField.borderStyle = .roundedRect
+        FoodnameTextField.font = UIFont.systemFont(ofSize: 18)
         
-        // Done Button
-          DoneButton.setTitle("Done", for: .normal)
-          DoneButton.setTitleColor(.white, for: .normal)
-          DoneButton.backgroundColor = .systemGreen
-          DoneButton.layer.cornerRadius = 10
-        
-          //  Order Button
-          OrderButton.setTitle("Order", for: .normal)
-          OrderButton.setTitleColor(.white, for: .normal)
-          OrderButton.backgroundColor = .systemBlue
-          OrderButton.layer.cornerRadius = 10
-         
-      }
-    @IBAction func doneButtonTapped(_ sender: UIButton) {
-        // Get the text from the text fields
-        let foodName = FoodnameTextField.text ?? ""
-        let quantityText = QuantityTextField.text ?? ""
+        if let name = selectedFoodName, let price = selectedPrice {
+            FoodnameTextField.text = "\(name) - ₹\(String(format: "%.2f", price))"
+        }
+        DataLabel.text = " "
+        DataLabel.textColor = .darkGray
+        DataLabel.textAlignment = .center
+        DataLabel.font = UIFont.systemFont(ofSize: 16)
 
-        // Validate and display the data
-        if let quantity = Int(quantityText.trimmingCharacters(in: .whitespacesAndNewlines)), !foodName.isEmpty {
-               
-               // Display Food and Quantity
-               DataLabel.text = "Food: \(foodName), Quantity: \(quantity)"
-               DataLabel.textColor = .black
-               
-               // Offer logic
-               if quantity >= 2 && quantity <= 5 {
-                   OfferLabel.text = "20% offer"
-                   OfferLabel.textColor = .systemGreen
-               } else if quantity >= 6 && quantity <= 10 {
-                   OfferLabel.text = "50% offer"
-                   OfferLabel.textColor = .systemOrange
-               } else if quantity > 10 {
-                   OfferLabel.text = "70% offer"
-                   OfferLabel.textColor = .systemRed
-               } //else {
-                  // OfferLabel.text = "No offer available"
-                   //OfferLabel.textColor = .darkGray
-               
-               
-           } else {
-               // Handle invalid or empty quantity
-               DataLabel.text = "Please Enter a Valid Food Name and Quantity"
-               DataLabel.textColor = .red
-               OfferLabel.text = ""
-           }
-        
-       }
-    @IBAction func OrderButtonTapped(_ sender: UIButton) {
-        if let menuVC = storyboard?.instantiateViewController(withIdentifier: "PaymentViewController") as? PaymentViewController {
-            navigationController?.pushViewController(menuVC, animated: true)
+        DoneButton.setTitle("Done", for: .normal)
+        DoneButton.setTitleColor(.white, for: .normal)
+        DoneButton.backgroundColor = .systemGreen
+        DoneButton.layer.cornerRadius = 10
+
+        OrderButton.setTitle("Order", for: .normal)
+        OrderButton.setTitleColor(.white, for: .normal)
+        OrderButton.backgroundColor = .systemBlue
+        OrderButton.layer.cornerRadius = 10
+    }
+
+    @objc func sliderValueChanged(_ sender: UISlider) {
+        let quantity = Int(sender.value)
+        QuantityLabel.text = "Quantity: \(quantity)"
+
+        if let name = selectedFoodName {
+            DataLabel.text = "Food: \(name), Quantity: \(quantity)"
+            DataLabel.textColor = .black
         }
     }
 
+    @IBAction func doneButtonTapped(_ sender: UIButton) {
+        let quantity = Int(QuantitySlider.value)
+
+        guard let name = selectedFoodName, let price = selectedPrice else {
+            DataLabel.text = "Please select a valid food item"
+            DataLabel.textColor = .red
+            OfferLabel.text = ""
+            costLabel.text = ""
+            return
+        }
+
+        // Calculate subtotal and apply discount
+        let subtotal = price * Double(quantity)
+        var discount: Double = 0.0
+
+        if quantity >= 2 && quantity <= 5 {
+            discount = 0.20
+            OfferLabel.text = "20% offer"
+            OfferLabel.textColor = .systemGreen
+        } else if quantity >= 6 && quantity <= 10 {
+            discount = 0.50
+            OfferLabel.text = "50% offer"
+            OfferLabel.textColor = .systemOrange
+        } else if quantity > 10 {
+            discount = 0.70
+            OfferLabel.text = "70% offer"
+            OfferLabel.textColor = .systemRed
+        } else {
+            OfferLabel.text = "No offer available"
+            OfferLabel.textColor = .darkGray
+        }
+
+        let discountAmount = subtotal * discount
+        let finalTotal = subtotal - discountAmount
+
+        // Show item and quantity in DataLabel
+        DataLabel.text = "Food: \(name), Quantity: \(quantity)"
+        DataLabel.textColor = .black
+
+        // Show discounted price in costLabel
+        costLabel.text = "Total: ₹\(String(format: "%.2f", finalTotal))"
+        costLabel.textColor = .purple
     }
 
-    
-    
 
-
+    @IBAction func OrderButtonTapped(_ sender: UIButton) {
+        if let paymentVC = storyboard?.instantiateViewController(withIdentifier: "PaymentViewController") as? PaymentViewController {
+            navigationController?.pushViewController(paymentVC, animated: true)
+        }
+    }
+}
