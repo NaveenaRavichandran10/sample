@@ -24,7 +24,7 @@ class PaymentViewController: UIViewController {
        
        override func viewDidLoad() {
            super.viewDidLoad()
-           
+           view.backgroundColor = UIColor(red: 0.93, green: 0.90, blue: 0.98, alpha: 1.0)
            // Set label texts
            VisaLabel.text = "Visa"
            PhonepeLabel.text = "PhonePe"
