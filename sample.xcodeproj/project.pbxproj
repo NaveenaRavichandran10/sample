@@ -22,6 +22,7 @@
 		AA9F4ACF2D91259B00F4543A /* FoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9F4ACE2D91259B00F4543A /* FoodViewController.swift */; };
 		AA9F4AD12D913A4B00F4543A /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9F4AD02D913A4B00F4543A /* MenuViewController.swift */; };
 		AA9F4AD32D91526500F4543A /* OptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9F4AD22D91526400F4543A /* OptionViewController.swift */; };
+		AAE5BD7B2DA54B4700F7F633 /* finalpaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE5BD7A2DA54B4700F7F633 /* finalpaymentViewController.swift */; };
 		AAF439212D929CD000CFC4A7 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF439202D929CD000CFC4A7 /* PaymentViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +63,7 @@
 		AA9F4ACE2D91259B00F4543A /* FoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodViewController.swift; sourceTree = "<group>"; };
 		AA9F4AD02D913A4B00F4543A /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		AA9F4AD22D91526400F4543A /* OptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionViewController.swift; sourceTree = "<group>"; };
+		AAE5BD7A2DA54B4700F7F633 /* finalpaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = finalpaymentViewController.swift; sourceTree = "<group>"; };
 		AAF439202D929CD000CFC4A7 /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,6 +129,7 @@
 				AA48B8EA2D9BD15200EF3782 /* DemoTableViewCell.swift */,
 				AA48B8EB2D9BD15200EF3782 /* DemoTableViewCell.xib */,
 				AA48B8EE2D9BD97000EF3782 /* DemoUIViewController.swift */,
+				AAE5BD7A2DA54B4700F7F633 /* finalpaymentViewController.swift */,
 			);
 			path = sample;
 			sourceTree = "<group>";
@@ -280,6 +283,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAE5BD7B2DA54B4700F7F633 /* finalpaymentViewController.swift in Sources */,
 				AA9F4A9F2D91234300F4543A /* AppDelegate.swift in Sources */,
 				AA48B8EF2D9BD97000EF3782 /* DemoUIViewController.swift in Sources */,
 				AA864E5C2D981FD200209D90 /* SearchViewController.swift in Sources */,

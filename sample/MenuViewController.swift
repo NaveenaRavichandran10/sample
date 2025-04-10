@@ -1,14 +1,7 @@
-//
-//  MenuViewController.swift
-//  sample
-//
-//  Created by FCI-MAC on 23/03/25.
-//
-
 import UIKit
 
 class MenuViewController: UIViewController {
-
+    
     @IBOutlet weak var FoodnameTextField: UITextField!
     @IBOutlet weak var OrderButton: UIButton!
     @IBOutlet weak var OfferLabel: UILabel!
@@ -20,57 +13,96 @@ class MenuViewController: UIViewController {
     
     var selectedFoodName: String?
     var selectedPrice: Double?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupUI()
-        view.backgroundColor = UIColor(red: 0.93, green: 0.90, blue: 0.98, alpha: 1.0)
-
+        
         QuantitySlider.value = 1
         QuantityLabel.text = "Quantity: \(Int(QuantitySlider.value))"
-
         QuantitySlider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
     }
-
+    
     func setupUI() {
-        view.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.98, alpha: 1.0)
+        // Gradient background to reflect vibrant food tones
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = view.bounds
+        gradientLayer.colors = [
+            UIColor(red: 1.0, green: 0.92, blue: 0.85, alpha: 1.0).cgColor, // peach
+            UIColor(red: 1.0, green: 0.75, blue: 0.60, alpha: 1.0).cgColor  // coral-orange
+        ]
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
+        view.layer.insertSublayer(gradientLayer, at: 0)
 
+        // Food name field
         FoodnameTextField.borderStyle = .roundedRect
-        FoodnameTextField.font = UIFont.systemFont(ofSize: 18)
-        
+        FoodnameTextField.backgroundColor = UIColor.white.withAlphaComponent(0.9)
+        FoodnameTextField.textColor = UIColor.darkText
+        FoodnameTextField.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        FoodnameTextField.layer.shadowColor = UIColor.black.cgColor
+        FoodnameTextField.layer.shadowOpacity = 0.2
+        FoodnameTextField.layer.shadowOffset = CGSize(width: 1, height: 2)
+        FoodnameTextField.layer.shadowRadius = 3
+
         if let name = selectedFoodName, let price = selectedPrice {
             FoodnameTextField.text = "\(name) - ₹\(String(format: "%.2f", price))"
         }
+
+        // Quantity Label
+        QuantityLabel.textColor = UIColor.brown
+        QuantityLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        QuantityLabel.textAlignment = .center
+
+        // Data Label
         DataLabel.text = " "
-        DataLabel.textColor = .darkGray
         DataLabel.textAlignment = .center
+        DataLabel.textColor = UIColor.darkGray
         DataLabel.font = UIFont.systemFont(ofSize: 16)
 
-        DoneButton.setTitle("Done", for: .normal)
-        DoneButton.setTitleColor(.white, for: .normal)
-        DoneButton.backgroundColor = .systemGreen
-        DoneButton.layer.cornerRadius = 10
+        // Offer Label
+        OfferLabel.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        OfferLabel.textAlignment = .center
 
-        OrderButton.setTitle("Order", for: .normal)
-        OrderButton.setTitleColor(.white, for: .normal)
-        OrderButton.backgroundColor = .systemBlue
-        OrderButton.layer.cornerRadius = 10
+        // Cost Label
+        costLabel.textAlignment = .center
+        costLabel.font = UIFont(name: "AvenirNext-Bold", size: 20)
+        costLabel.textColor = UIColor(red: 0.55, green: 0.08, blue: 0.38, alpha: 1.0) // Taste Trove purple
+
+        // Done Button
+        styleButton(DoneButton, color: UIColor(red: 0.86, green: 0.27, blue: 0.27, alpha: 1.0), title: "Done")
+
+        // Order Button
+        styleButton(OrderButton, color: UIColor(red: 0.86, green: 0.27, blue: 0.27, alpha: 1.0), title: "Order")
     }
 
+    
+    func styleButton(_ button: UIButton, color: UIColor, title: String) {
+        button.setTitle(title, for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = color
+        button.layer.cornerRadius = 12
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOpacity = 0.3
+        button.layer.shadowOffset = CGSize(width: 2, height: 3)
+        button.layer.shadowRadius = 4
+    }
+    
     @objc func sliderValueChanged(_ sender: UISlider) {
         let quantity = Int(sender.value)
         QuantityLabel.text = "Quantity: \(quantity)"
-
+        
         if let name = selectedFoodName {
             DataLabel.text = "Food: \(name), Quantity: \(quantity)"
             DataLabel.textColor = .black
         }
     }
-
+    
     @IBAction func doneButtonTapped(_ sender: UIButton) {
         let quantity = Int(QuantitySlider.value)
-
+        
         guard let name = selectedFoodName, let price = selectedPrice else {
             DataLabel.text = "Please select a valid food item"
             DataLabel.textColor = .red
@@ -78,11 +110,10 @@ class MenuViewController: UIViewController {
             costLabel.text = ""
             return
         }
-
-        // Calculate subtotal and apply discount
+        
         let subtotal = price * Double(quantity)
         var discount: Double = 0.0
-
+        
         if quantity >= 2 && quantity <= 5 {
             discount = 0.20
             OfferLabel.text = "20% offer"
@@ -99,23 +130,19 @@ class MenuViewController: UIViewController {
             OfferLabel.text = "No offer available"
             OfferLabel.textColor = .darkGray
         }
-
+        
         let discountAmount = subtotal * discount
         let finalTotal = subtotal - discountAmount
-
-        // Show item and quantity in DataLabel
+        
         DataLabel.text = "Food: \(name), Quantity: \(quantity)"
         DataLabel.textColor = .black
-
-        // Show discounted price in costLabel
+        
         costLabel.text = "Total: ₹\(String(format: "%.2f", finalTotal))"
-        costLabel.textColor = .purple
     }
-
-
+    
     @IBAction func OrderButtonTapped(_ sender: UIButton) {
-        if let paymentVC = storyboard?.instantiateViewController(withIdentifier: "PaymentViewController") as? PaymentViewController {
-            navigationController?.pushViewController(paymentVC, animated: true)
+        if let menuVC = storyboard?.instantiateViewController(withIdentifier: "PaymentViewController") as? PaymentViewController {
+            navigationController?.pushViewController(menuVC, animated: true)
         }
     }
 }

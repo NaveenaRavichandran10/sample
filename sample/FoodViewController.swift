@@ -33,52 +33,55 @@ class FoodViewController: UIViewController {
     }
 
     func setupUI() {
-        view.backgroundColor = UIColor(red: 0.93, green: 0.90, blue: 0.98, alpha: 1.0)
+        // Background with a warm gradient style
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = view.bounds
+        gradientLayer.colors = [
+            UIColor(red: 1.0, green: 0.85, blue: 0.70, alpha: 1.0).cgColor,  // soft orange
+            UIColor(red: 1.0, green: 0.65, blue: 0.55, alpha: 1.0).cgColor   // coral red
+        ]
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
+        view.layer.insertSublayer(gradientLayer, at: 0)
+        
+        // App Title Styling
+        FoodLabel.text = "Taste Trove"
+        FoodLabel.textAlignment = .center
+        FoodLabel.textColor = UIColor(red: 0.45, green: 0.11, blue: 0.02, alpha: 1.0) // Rich brown
+        FoodLabel.font = UIFont(name: "Avenir-Heavy", size: 36)
 
-
-        FirstLabel.text = "Spicy"
-        SecondLabel.text = "Sweets"
-        ThirdLabel.text = "Chats"
-
-        // Common style
+        // Category Label Styling
         let labels = [FirstLabel, SecondLabel, ThirdLabel]
-        for label in labels {
+        let categories = ["Spicy", "Sweets", "Chats"]
+        for (index, label) in labels.enumerated() {
+            label?.text = categories[index]
             label?.isUserInteractionEnabled = true
             label?.textColor = .white
             label?.textAlignment = .center
-            label?.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+            label?.font = UIFont.boldSystemFont(ofSize: 18)
+            label?.backgroundColor = UIColor(red: 0.86, green: 0.27, blue: 0.27, alpha: 1.0) // warm red
             label?.layer.cornerRadius = 20
             label?.layer.masksToBounds = true
             label?.layer.shadowColor = UIColor.black.cgColor
-            label?.layer.shadowOpacity = 0.25
-            label?.layer.shadowOffset = CGSize(width: 2, height: 4)
+            label?.layer.shadowOpacity = 0.2
+            label?.layer.shadowOffset = CGSize(width: 2, height: 3)
             label?.layer.shadowRadius = 4
-            label?.heightAnchor.constraint(equalToConstant: 50).isActive = true
         }
 
-        FirstLabel.backgroundColor = UIColor(red: 0.65, green: 0.48, blue: 0.80, alpha: 1.0)
-                SecondLabel.backgroundColor = UIColor(red: 0.65, green: 0.48, blue: 0.80, alpha: 1.0)
-                ThirdLabel.backgroundColor = UIColor(red: 0.65, green: 0.48, blue: 0.80, alpha: 1.0)
-        // Tap Gestures
+        // Add Tap Gestures
         FirstLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(spicyLabelTapped)))
         SecondLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(sweetLabelTapped)))
         ThirdLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(chatsLabelTapped)))
 
-        // Food Heading
-        FoodLabel.text = "WoHoo Foodzz"
-        FoodLabel.textAlignment = .center
-        FoodLabel.textColor = UIColor.systemPurple
-        FoodLabel.font = UIFont.boldSystemFont(ofSize: 36)
-
-        // Next Button Style
+        // Next Button Styling
         NextButton.setTitle("Next", for: .normal)
         NextButton.setTitleColor(.white, for: .normal)
-        NextButton.backgroundColor = UIColor.systemIndigo
-        NextButton.layer.cornerRadius = 12
+        NextButton.backgroundColor = UIColor(red: 0.10, green: 0.55, blue: 0.33, alpha: 1.0) // Fresh green
+        NextButton.layer.cornerRadius = 14
         NextButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         NextButton.layer.shadowColor = UIColor.black.cgColor
-        NextButton.layer.shadowOpacity = 0.3
-        NextButton.layer.shadowOffset = CGSize(width: 2, height: 3)
+        NextButton.layer.shadowOpacity = 0.25
+        NextButton.layer.shadowOffset = CGSize(width: 2, height: 4)
         NextButton.layer.shadowRadius = 4
     }
 
