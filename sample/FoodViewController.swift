@@ -28,7 +28,7 @@ class FoodViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        NextButton.isHidden = true
+        
         setupUI()
     }
 
@@ -73,16 +73,7 @@ class FoodViewController: UIViewController {
         SecondLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(sweetLabelTapped)))
         ThirdLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(chatsLabelTapped)))
 
-        // Next Button Styling
-        NextButton.setTitle("Next", for: .normal)
-        NextButton.setTitleColor(.white, for: .normal)
-        NextButton.backgroundColor = UIColor(red: 0.10, green: 0.55, blue: 0.33, alpha: 1.0) // Fresh green
-        NextButton.layer.cornerRadius = 14
-        NextButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        NextButton.layer.shadowColor = UIColor.black.cgColor
-        NextButton.layer.shadowOpacity = 0.25
-        NextButton.layer.shadowOffset = CGSize(width: 2, height: 4)
-        NextButton.layer.shadowRadius = 4
+        
     }
 
     @objc func spicyLabelTapped() {

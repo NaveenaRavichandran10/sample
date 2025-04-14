@@ -10,7 +10,6 @@ class finalpaymentViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Payment Confirmation"
         setupGradientBackground()
         setupConfirmationPage()
     }
@@ -34,7 +33,7 @@ class finalpaymentViewController: UIViewController {
         conformationLabel.textAlignment = .center
 
         timeshowingLabel.text = "Your order will be processed in approx. 10-15 mins."
-        timeshowingLabel.textColor = .darkGray
+        timeshowingLabel.textColor = .black
         timeshowingLabel.font = .systemFont(ofSize: 16)
         timeshowingLabel.textAlignment = .center
         timeshowingLabel.numberOfLines = 0

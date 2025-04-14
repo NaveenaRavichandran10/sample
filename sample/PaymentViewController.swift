@@ -24,6 +24,15 @@ class PaymentViewController: UIViewController {
         setupLabels()
         setupButtons()
     }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        let labels = [VisaLabel, PhonepeLabel, CashondeliveryLabel, PaytmLabel]
+        for label in labels {
+            label?.layer.cornerRadius = 12
+        }
+    }
+
     
     func setupGradientBackground() {
         let gradientLayer = CAGradientLayer()

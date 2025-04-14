@@ -7,11 +7,7 @@ class DemoTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-      //  self.contentView.translatesAutoresizingMaskIntoConstraints = false
-//        WorkLabel.translatesAutoresizingMaskIntoConstraints = false
- //       NameLabel.translatesAutoresizingMaskIntoConstraints = false
-       // DemoView.translatesAutoresizingMaskIntoConstraints = false
+    
     }
 
     func SetupUI(){
@@ -20,6 +16,7 @@ class DemoTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        
         
     }
 }
